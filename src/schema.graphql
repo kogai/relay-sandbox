@@ -1,3 +1,9 @@
+type User {
+  name: String
+  login: String
+}
+
 type Query {
-  gists: [String]
+  # gists: [String]
+  viewer: User
 }

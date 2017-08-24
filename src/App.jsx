@@ -13,6 +13,7 @@ import {
 } from 'relay-runtime';
 
 import List from './List';
+import User from './User';
 
 const mountNode = document.getElementById('root');
 
@@ -47,14 +48,16 @@ ReactDOM.render(
     environment={modernEnvironment}
     query={graphql`
       query AppQuery {
-        gists
+        viewer {
+          login
+          name
+        }
       }
     `}
     variables={{}}
     render={({error, props}) => {
-      console.log(error, props);
       if (props) {
-        return <List viewer={props.viewer} />;
+        return <User viewer={props.viewer} />;
       } else {
         return <div>Loading</div>;
       }
