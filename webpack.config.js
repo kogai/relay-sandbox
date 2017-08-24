@@ -26,11 +26,9 @@ module.exports = {
     }],
   },
   context: input,
-  entry: {
-    index: ["./App.jsx"],
-  },
+  entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'App.jsx')],
   output: {
-    filename: "[name].js",
+    filename: "index.js",
     path: output,
   },
   devtool: "source-map",

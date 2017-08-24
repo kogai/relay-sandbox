@@ -24,7 +24,7 @@ function fetchQuery(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization: bearer': process.env.TOKEN
+      'Authorization': `bearer ${process.env.TOKEN}`
     },
     body: JSON.stringify({
       query: operation.text,
@@ -32,6 +32,8 @@ function fetchQuery(
     }),
   }).then(response => {
     return response.json();
+  }).catch(e => {
+    console.error(e);
   });
 }
 
@@ -50,6 +52,7 @@ ReactDOM.render(
     `}
     variables={{}}
     render={({error, props}) => {
+      console.log(error, props);
       if (props) {
         return <List viewer={props.viewer} />;
       } else {
