@@ -47,12 +47,13 @@ ReactDOM.render(
   <QueryRenderer
     environment={modernEnvironment}
     query={graphql`
-      query AppQuery($count: Int!) {
-        viewer {
-          login
-          name
-          gists(last: $count) {
-            nodes { name description isPublic }
+      mutation AppMutation {
+        addReaction(input: { subjectId:"MDU6SXNzdWUyMzEzOTE1NTE=", content:HOORAY } ) {
+          reaction {
+            content
+          }
+          subject {
+            id
           }
         }
       }
@@ -62,11 +63,13 @@ ReactDOM.render(
     }}
     render={({error, props}) => {
       console.log(error);
+      console.log(props);
       if (props) {
         return (
           <div>
-            <User viewer={props.viewer} />
-            <List gists={props.viewer.gists.nodes} />
+         リアクションしたIssue https://github.com/octocat/Hello-World/issues/349<br/>
+          {props.addReaction.subject.id}/
+          {props.addReaction.reaction.content}
           </div>
         );
       } else {

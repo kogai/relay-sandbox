@@ -14,6 +14,37 @@ type User {
 }
 
 type Query {
-  # gists: [String]
   viewer: User
+}
+
+input ReactionInput {
+  subjectId: String
+  content: Reactions
+}
+
+type Reaction {
+  content: String
+}
+
+type Subject {
+  id: String
+}
+
+type ReactionOutput {
+  reaction: Reaction
+  subject: Subject
+}
+
+enum Reactions {
+  HOORAY
+}
+
+type Mutation {
+  addReaction(input: ReactionInput): ReactionOutput 
+  # addTodo(input: AddTodoInput!): AddTodoPayload
+  # changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
+  # markAllTodos(input: MarkAllTodosInput!): MarkAllTodosPayload
+  # removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
+  # removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
+  # renameTodo(input: RenameTodoInput!): RenameTodoPayload
 }
