@@ -52,7 +52,7 @@ ReactDOM.render(
           login
           name
           gists(last: $count) {
-            nodes { name }
+            nodes { name description isPublic }
           }
         }
       }

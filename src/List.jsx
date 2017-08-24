@@ -5,5 +5,13 @@ import {
 } from 'react-relay';
 
 export default ({ gists }) => {
- return <ul>{ gists.map(x => <li key={x.name}>{x.name}</li>)}</ul>
+  console.log(gists);
+ return <ul>{ gists.map(x => (
+  <li key={x.name}>
+    [{`${x.isPublic}`}]__
+    {x.name}__
+    {x.description}
+    
+  </li>
+ ))}</ul>
 };

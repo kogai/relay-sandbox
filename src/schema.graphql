@@ -1,5 +1,7 @@
 type Node {
-name: String
+  name: String
+  description: String
+  isPublic: Boolean
 }
 type Gist {
   nodes: [Node]
