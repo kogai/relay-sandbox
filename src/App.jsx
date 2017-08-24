@@ -47,17 +47,28 @@ ReactDOM.render(
   <QueryRenderer
     environment={modernEnvironment}
     query={graphql`
-      query AppQuery {
+      query AppQuery($count: Int!) {
         viewer {
           login
           name
+          gists(last: $count) {
+            nodes { name }
+          }
         }
       }
     `}
-    variables={{}}
+    variables={{
+      count: 10
+    }}
     render={({error, props}) => {
+      console.log(error);
       if (props) {
-        return <User viewer={props.viewer} />;
+        return (
+          <div>
+            <User viewer={props.viewer} />
+            <List gists={props.viewer.gists.nodes} />
+          </div>
+        );
       } else {
         return <div>Loading</div>;
       }

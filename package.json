@@ -6,6 +6,7 @@
   "scripts": {
     "start": "yarn build:relay && webpack-dev-server",
     "build:relay": "relay-compiler --src ./src/ --schema ./src/schema.graphql --extensions js jsx",
+    "build:relay:watch": "yarn build:relay -- --watch",
     "build": "yarn build:relay && webpack"
   },
   "keywords": [],

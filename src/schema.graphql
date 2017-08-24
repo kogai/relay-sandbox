@@ -1,6 +1,14 @@
+type Node {
+name: String
+}
+type Gist {
+  nodes: [Node]
+}
+
 type User {
-  name: String
-  login: String
+  name: String!
+  login: String!
+  gists(last: Int!): Gist
 }
 
 type Query {
