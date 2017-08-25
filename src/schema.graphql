@@ -14,7 +14,7 @@ type User {
   gists(last: Int!): Gist
 }
 
-input ReactionInput {
+input AddReactionInput {
   subjectId: String!
   content: ReactionContent!
 }
@@ -33,11 +33,16 @@ type ReactionOutput {
 }
 
 enum ReactionContent {
+  THUMBS_UP
+  THUMBS_DOWN
+  LAUGH
+  CONFUSED
+  HEART
   HOORAY
 }
 
 type Mutation {
-  addReaction(input: ReactionInput): ReactionOutput 
+  addReaction(input: AddReactionInput!): ReactionOutput 
 }
 
 type Query {

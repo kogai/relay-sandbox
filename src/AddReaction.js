@@ -21,7 +21,7 @@ mutation mutateMutation {
  
 //  /*
 const mutation = graphql`
-mutation AddReactionMutation($input: ReactionInput) {
+mutation AddReactionMutation($input: AddReactionInput!) {
   addReaction(input:$input) {
     reaction {
       content

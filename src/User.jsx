@@ -5,6 +5,14 @@ import {
 } from 'react-relay';
 import { connect } from 'react-redux';
 import { commit } from './AddReaction';
+const reactions = [
+"THUMBS_UP",
+"THUMBS_DOWN",
+"LAUGH",
+"CONFUSED",
+"HEART",
+"HOORAY",
+]
 
 const User = ({ data: {name, login}, sample, ...rest }) => {
   console.log(rest.relay.environment);
@@ -14,7 +22,11 @@ const User = ({ data: {name, login}, sample, ...rest }) => {
     <br/>
     With redux -> {sample.reduce((acc, x) => `${acc}-${x}`)}
     <br/>
-    <button onClick={() => commit(rest.relay.environment, "MDU6SXNzdWUyMzEzOTE1NTE=", "HOORAY")}>Reaction</button>
+    {
+      reactions.map(r => 
+      <button key={r} onClick={() => commit(rest.relay.environment, "MDU6SXNzdWUyMzEzOTE1NTE=", r)}>{r}</button>
+      )
+    }
     <br/>
     <a href="https://github.com/octocat/Hello-World/issues/349">リアクションしたIssue</a>
   </div>
