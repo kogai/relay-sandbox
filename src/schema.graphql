@@ -15,8 +15,8 @@ type User {
 }
 
 input ReactionInput {
-  subjectId: String
-  content: Reactions
+  subjectId: String!
+  content: ReactionContent!
 }
 
 type Reaction {
@@ -32,18 +32,12 @@ type ReactionOutput {
   subject: Subject
 }
 
-enum Reactions {
+enum ReactionContent {
   HOORAY
 }
 
 type Mutation {
   addReaction(input: ReactionInput): ReactionOutput 
-  # addTodo(input: AddTodoInput!): AddTodoPayload
-  # changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
-  # markAllTodos(input: MarkAllTodosInput!): MarkAllTodosPayload
-  # removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
-  # removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
-  # renameTodo(input: RenameTodoInput!): RenameTodoPayload
 }
 
 type Query {

@@ -3,6 +3,7 @@ import {
   createFragmentContainer,
   graphql,
 } from 'react-relay';
+import { connect } from 'react-redux';
 
 export const ListTimpl = ({ gists }) => {
  return <ul>{ gists.nodes.map(x => (
@@ -32,3 +33,9 @@ export const ListFragment = createFragmentContainer(List, graphql`
     }
   }
 `)
+
+export default connect(p => {
+  // console.log(p);
+  return p
+})(ListFragment);
+

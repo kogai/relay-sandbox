@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import {
   QueryRenderer,
   graphql,
@@ -13,7 +13,7 @@ import {
   Store,
 } from 'relay-runtime';
 
-import { ListFragment } from './List';
+import List, { ListFragment } from './List';
 import User from './User';
 import { fetchQuery } from './client';
 
@@ -32,9 +32,13 @@ const sample = (state = [0, 1, 2], action) => {
       return state;
   }
 };
-const store = createStore(combineReducers({ sample }));
-const QueryRenderWithRedux = ({ sample }) => {
-  console.log(sample);
+const store = createStore(
+  combineReducers({ sample }),
+  devToolsExtension()
+);
+const QueryRenderWithRedux = ({ sample, dispatch }) => {
+  
+  dispatch({ type: "FOO"})
   return <QueryRenderer
       environment={modernEnvironment}
       query={graphql`
@@ -46,10 +50,9 @@ const QueryRenderWithRedux = ({ sample }) => {
         }
       `}
       variables={{
-        count: 10
+        count: 20
       }}
       render={({error, props}) => {
-        // console.log(props);
         if (error) {
           console.error(error.source);
           console.error(error.message);
@@ -57,8 +60,8 @@ const QueryRenderWithRedux = ({ sample }) => {
         if (props) {
           return (
             <div>
-            <User data={props.viewer}/>
-            <ListFragment data={props.viewer}/>
+              <User data={props.viewer}/>
+              <List data={props.viewer}/>
             </div>
           );
         } else {
