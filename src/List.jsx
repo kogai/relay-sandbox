@@ -5,7 +5,6 @@ import {
 } from 'react-relay';
 
 export const ListTimpl = ({ gists }) => {
-  console.log(gists);
  return <ul>{ gists.nodes.map(x => (
   <li key={x.name}>
     [{`${x.isPublic}`}]__
