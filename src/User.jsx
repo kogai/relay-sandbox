@@ -6,7 +6,6 @@ import {
 import { connect } from 'react-redux';
 
 const User = ({ data: {name, login}, sample, ...rest }) => {
-  console.log(rest);
   return <div>
     With relay -> {name}!({login})
     <br/>
@@ -15,7 +14,6 @@ const User = ({ data: {name, login}, sample, ...rest }) => {
 }
 
 export default createFragmentContainer(connect(p => {
-  // console.log(p);
   return p
 })(User), graphql`
   fragment User on User {

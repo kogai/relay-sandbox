@@ -10,7 +10,6 @@ export const ListTimpl = ({ gists }) => {
     [{`${x.isPublic}`}]__
     {x.name}__
     {x.description}
-    
   </li>
  ))}</ul>
 };

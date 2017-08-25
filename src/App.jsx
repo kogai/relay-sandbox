@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import {
   QueryRenderer,
@@ -33,10 +33,9 @@ const sample = (state = [0, 1, 2], action) => {
   }
 };
 const store = createStore(combineReducers({ sample }));
-
-ReactDOM.render(
-  <Provider store={store}>
-    <QueryRenderer
+const QueryRenderWithRedux = ({ sample }) => {
+  console.log(sample);
+  return <QueryRenderer
       environment={modernEnvironment}
       query={graphql`
         query AppQuery {
@@ -67,6 +66,15 @@ ReactDOM.render(
         }
       }}
     />
+}
+
+const HOC = connect(p => {
+  return p
+})(QueryRenderWithRedux)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <HOC />
   </Provider>,
   mountNode
 );
