@@ -38,6 +38,8 @@ function fetchQuery(
   });
 }
 
+const stroe = new Store(new RecordSource());
+
 const modernEnvironment = new Environment({
   network: Network.create(fetchQuery),
   store: new Store(new RecordSource()),
@@ -49,8 +51,7 @@ ReactDOM.render(
     query={graphql`
       query AppQuery {
         viewer {
-          name
-          login
+          ...User
           ...List
         }
       }
@@ -67,6 +68,7 @@ ReactDOM.render(
       if (props) {
         return (
           <div>
+          <User data={props.viewer}/>
           <ListFragment data={props.viewer}/>
           </div>
         );

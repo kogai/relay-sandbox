@@ -4,6 +4,12 @@ import {
   graphql,
 } from 'react-relay';
 
-export default ({ viewer: { name, login } }) =>  {
- return <div>Hello, {name}!({login})</div>
-};
+const User = ({ data: {name, login}}) => <div>Hello, {name}!({login})</div>
+
+export default createFragmentContainer(User, graphql`
+  fragment User on User {
+    name
+    login
+  }
+`)
+

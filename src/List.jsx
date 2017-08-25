@@ -19,7 +19,6 @@ export const ListTimpl = ({ gists }) => {
 
 export class List extends React.Component {
   render() {
-    console.log(this.props.data);
     return <div><ListTimpl {...this.props.data }/></div>
   }
 }
