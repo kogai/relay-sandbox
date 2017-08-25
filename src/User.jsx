@@ -14,9 +14,8 @@ const reactions = [
 "HOORAY",
 ]
 
-const User = ({ data: {name, login}, sample, ...rest }) => {
-  console.log(rest.relay.environment);
-  // commit(rest.relay.environment, "MDU6SXNzdWUyMzEzOTE1NTE=", "HOORAY")
+const User = ({ data, sample, ...rest }) => {
+  const { name, login } = data
   return <div>
     With relay -> {name}!({login})
     <br/>
@@ -24,7 +23,7 @@ const User = ({ data: {name, login}, sample, ...rest }) => {
     <br/>
     {
       reactions.map(r => 
-      <button key={r} onClick={() => commit(rest.relay.environment, "MDU6SXNzdWUyMzEzOTE1NTE=", r)}>{r}</button>
+      <button key={r} onClick={() => commit(rest.relay.environment, "MDU6SXNzdWUyMzEzOTE1NTE=", r, data)}>{r}</button>
       )
     }
     <br/>
