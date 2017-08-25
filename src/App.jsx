@@ -12,7 +12,7 @@ import {
   Store,
 } from 'relay-runtime';
 
-import List from './List';
+import { ListFragment } from './List';
 import User from './User';
 
 const mountNode = document.getElementById('root');
@@ -47,14 +47,11 @@ ReactDOM.render(
   <QueryRenderer
     environment={modernEnvironment}
     query={graphql`
-      mutation AppMutation {
-        addReaction(input: { subjectId:"MDU6SXNzdWUyMzEzOTE1NTE=", content:HOORAY } ) {
-          reaction {
-            content
-          }
-          subject {
-            id
-          }
+      query AppQuery {
+        viewer {
+          name
+          login
+          ...List
         }
       }
     `}
@@ -62,14 +59,15 @@ ReactDOM.render(
       count: 10
     }}
     render={({error, props}) => {
-      console.log(error);
       console.log(props);
+      if (error) {
+        console.error(error.source);
+        console.error(error.message);
+      }
       if (props) {
         return (
           <div>
-         リアクションしたIssue https://github.com/octocat/Hello-World/issues/349<br/>
-          {props.addReaction.subject.id}/
-          {props.addReaction.reaction.content}
+          <ListFragment data={props.viewer}/>
           </div>
         );
       } else {

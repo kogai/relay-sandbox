@@ -4,9 +4,9 @@ import {
   graphql,
 } from 'react-relay';
 
-export default ({ gists }) => {
+export const ListTimpl = ({ gists }) => {
   console.log(gists);
- return <ul>{ gists.map(x => (
+ return <ul>{ gists.nodes.map(x => (
   <li key={x.name}>
     [{`${x.isPublic}`}]__
     {x.name}__
@@ -15,3 +15,23 @@ export default ({ gists }) => {
   </li>
  ))}</ul>
 };
+
+
+export class List extends React.Component {
+  render() {
+    console.log(this.props.data);
+    return <div><ListTimpl {...this.props.data }/></div>
+  }
+}
+
+export const ListFragment = createFragmentContainer(List, graphql`
+  fragment List on User {
+    gists(last: 10) {
+      nodes {
+        name
+        description
+        isPublic
+      }
+    }
+  }
+`)

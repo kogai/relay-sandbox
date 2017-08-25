@@ -3,6 +3,7 @@ type Node {
   description: String
   isPublic: Boolean
 }
+
 type Gist {
   nodes: [Node]
 }
@@ -11,10 +12,6 @@ type User {
   name: String!
   login: String!
   gists(last: Int!): Gist
-}
-
-type Query {
-  viewer: User
 }
 
 input ReactionInput {
@@ -47,4 +44,8 @@ type Mutation {
   # removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
   # removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
   # renameTodo(input: RenameTodoInput!): RenameTodoPayload
+}
+
+type Query {
+  viewer: User
 }
