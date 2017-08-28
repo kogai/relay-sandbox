@@ -24,7 +24,7 @@ export const commit = (env, subjectId, content, user) =>  {
   commitMutation(env, {
     mutation,
     variables,
-    updater: store => {
+    updater: (store, response) => {
       const viewerProxy = store.getRoot().getLinkedRecord("viewer")
       const name = viewerProxy.getValue("name")
       viewerProxy.setValue(`${name}-${content}`, 'name')
